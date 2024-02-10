@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "oop-h-w-13-1"
+version = "0.1.0"
+description = ""
+authors = ["georg <zhora.karsakov@mail.ru>"]
+readme = "README.md"
+packages = [{include = "oop_h"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.0"
+pytest-cov = "^4.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
