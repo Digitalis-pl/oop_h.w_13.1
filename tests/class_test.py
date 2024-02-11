@@ -1,5 +1,6 @@
 import pytest
 from classes import Product, Category
+from function import create_instance, category_count
 
 @pytest.fixture
 def product_toster():
@@ -59,5 +60,6 @@ category_list = [
   }
 ]
 
-def test_all_category():
-    all_category(category_list) == 2
+f = create_instance(category_list)
+def test_category_count():
+    assert category_count(f) == [2, 4]
