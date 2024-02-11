@@ -2,13 +2,13 @@ class Category:
     name: str
     description: str
     product: str
-    all_category: int
-    unicue_product: int
 
-    def __init__(self, name, description, product):
+    def __init__(self, name, description, product, all_category, unicue_product):
         self.name = name
         self.description = description
         self.product = product
+        self.all_category = all_category
+        self.unicue_product = unicue_product
 
 
 class Product:

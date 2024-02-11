@@ -2,24 +2,6 @@ import pytest
 from classes import Product, Category
 from function import create_instance, category_count
 
-@pytest.fixture
-def product_toster():
-    return Product("toster", "fry our bread", 6500.50, 20000)
-
-def test_init(product_toster):
-    assert product_toster.name == "toster"
-    assert product_toster.description == "fry our bread"
-    assert product_toster.price == 6500.50
-    assert product_toster.count == 20000
-
-@pytest.fixture()
-def device_category():
-    return Category("devices", "electronic", "tosters")
-
-def test_init_category(device_category):
-    assert device_category.name == "devices"
-    assert device_category.description == "electronic"
-    assert device_category.product == "tosters"
 
 category_list = [
   {
@@ -59,6 +41,26 @@ category_list = [
     ]
   }
 ]
+@pytest.fixture
+def product_toster():
+    return Product("toster", "fry our bread", 6500.50, 20000)
+
+def test_init(product_toster):
+    assert product_toster.name == "toster"
+    assert product_toster.description == "fry our bread"
+    assert product_toster.price == 6500.50
+    assert product_toster.count == 20000
+
+@pytest.fixture()
+def device_category():
+    return Category("devices", "electronic", "tosters", len(category_list), len(category_list[1]))
+
+def test_init_category(device_category):
+    assert device_category.name == "devices"
+    assert device_category.description == "electronic"
+    assert device_category.product == "tosters"
+    assert device_category.all_category == 2
+    assert device_category.unicue_product == 3
 
 f = create_instance(category_list)
 def test_category_count():
