@@ -13,5 +13,10 @@ def create_instance(category_list):
         for x in i["products"]:
             product_list.append(Product(x["name"], x["description"], x["price"], x["quantity"]))
     return [category_instance_list, product_list]
-print(create_instance(open_json()))
+
+def category_count(list):
+    category_product_number_list = []
+    for e in list:
+         category_product_number_list.append(len(e))
+    return category_product_number_list
 
