@@ -2,6 +2,8 @@ class Category:
     name: str
     description: str
     product: str
+    all_category = 0
+    unicue_product = 0
 
     def __init__(self, name, description, product, all_category, unicue_product):
         self.name = name
