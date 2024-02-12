@@ -19,4 +19,3 @@ def category_count(list):
     for e in list:
          category_product_number_list.append(len(e))
     return category_product_number_list
-
