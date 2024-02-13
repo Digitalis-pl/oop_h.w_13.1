@@ -1,6 +1,5 @@
 import pytest
 from classes import Product, Category
-from function import create_instance, category_count
 
 
 category_list = [
@@ -53,7 +52,7 @@ def test_init(product_toster):
 
 @pytest.fixture()
 def device_category():
-    return Category("devices", "electronic", [
+    return [Category("devices", "electronic", [
       {
         "name": "Samsung Galaxy C23 Ultra",
         "description": "256GB, Серый цвет, 200MP камера",
@@ -72,12 +71,20 @@ def device_category():
         "price": 31000.0,
         "quantity": 14
       }
-    ], len(category_list), len(category_list[1]))
+    ]), Category("tv", "tv", [
+
+      {
+        "name": "55\" QLED 4K",
+        "description": "Фоновая подсветка",
+        "price": 123000.0,
+        "quantity": 7
+      }
+    ])]
 
 def test_init_category(device_category):
-    assert device_category.name == "devices"
-    assert device_category.description == "electronic"
-    assert device_category.product == [
+    assert device_category[0].name == "devices"
+    assert device_category[0].description == "electronic"
+    assert device_category[0].product == [
       {
         "name": "Samsung Galaxy C23 Ultra",
         "description": "256GB, Серый цвет, 200MP камера",
@@ -97,9 +104,5 @@ def test_init_category(device_category):
         "quantity": 14
       }
     ]
-    assert device_category.all_category == 2
-    assert device_category.unicue_product == 3
-
-f = create_instance(category_list)
-def test_category_count():
-    assert category_count(f) == [2, 4]
+    assert Category.all_category == 2
+    assert device_category[0].unicue_product == 3
