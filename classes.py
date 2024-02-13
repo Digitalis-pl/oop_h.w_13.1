@@ -1,3 +1,5 @@
+
+
 class Category:
     name: str
     description: str
@@ -5,12 +7,12 @@ class Category:
     all_category = 0
     unicue_product = 0
 
-    def __init__(self, name, description, product, all_category, unicue_product):
+    def __init__(self, name, description, product):
         self.name = name
         self.description = description
         self.product = product
-        self.all_category = all_category
-        self.unicue_product = unicue_product
+        Category.all_category += 1
+        self.unicue_product = len(product)
 
 
 class Product:
