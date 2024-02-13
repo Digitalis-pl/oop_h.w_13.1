@@ -12,7 +12,8 @@ class Category:
         self.description = description
         self.product = product
         Category.all_category += 1
-        self.unicue_product = len(product)
+        Category.unicue_product += len(product)
+        self.unicue_product_in_category = len((product))
 
 
 class Product:
