@@ -107,3 +107,4 @@ def test_init_category(device_category):
     assert Category.all_category == 2
     assert Category.unicue_product == 4
     assert device_category[0].unicue_product_in_category == 3
+    assert device_category[1].unicue_product_in_category == 1
