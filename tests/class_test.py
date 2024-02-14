@@ -5,7 +5,8 @@ from classes import Product, Category
 category_list = [
   {
     "name": "Смартфоны",
-    "description": "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни",
+    "description": "Смартфоны, как средство не только коммуникации, но и получение дополнительных"
+                   " функций для удобства жизни",
     "products": [
       {
         "name": "Samsung Galaxy C23 Ultra",
@@ -29,7 +30,8 @@ category_list = [
   },
   {
     "name": "Телевизоры",
-    "description": "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+    "description": "Современный телевизор, который позволяет наслаждаться просмотром,"
+                   " станет вашим другом и помощником",
     "products": [
       {
         "name": "55\" QLED 4K",
@@ -40,15 +42,19 @@ category_list = [
     ]
   }
 ]
+
+
 @pytest.fixture
 def product_toster():
     return Product("toster", "fry our bread", 6500.50, 20000)
+
 
 def test_init(product_toster):
     assert product_toster.name == "toster"
     assert product_toster.description == "fry our bread"
     assert product_toster.price == 6500.50
     assert product_toster.count == 20000
+
 
 @pytest.fixture()
 def device_category():
@@ -81,6 +87,7 @@ def device_category():
       }
     ])]
 
+
 def test_init_category(device_category):
     assert device_category[0].name == "devices"
     assert device_category[0].description == "electronic"
@@ -105,6 +112,6 @@ def test_init_category(device_category):
       }
     ]
     assert Category.all_category == 2
-    assert Category.unicue_product == 4
+    assert Category.unique_product == 4
     assert device_category[0].unicue_product_in_category == 3
     assert device_category[1].unicue_product_in_category == 1
