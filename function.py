@@ -1,16 +1,16 @@
 import json
-from classes import Category, Product
-def open_json():
-    with open("products.json", "r", encoding="utf-8") as f:
-        category_list = json.loads(f.read())
-        return category_list
+from classes import Category, Product, CateProd
 
 def create_instance(category_list):
     category_instance_list = []
     product_list = []
+    counter = -1
     for i in category_list:
-        category_instance_list.append(Category(i["name"], i["description"], i["products"]))
+        product_list.append([])
+        counter += 1
         for x in i["products"]:
-            product_list.append(Product(x["name"], x["description"], x["price"], x["quantity"]))
+            product_list[counter].append(Product(x["name"], x["description"], x["price"], x["quantity"]))
+        category_instance_list.append(Category(i["name"], i["description"], product_list[counter]))
     return [category_instance_list, product_list]
 
+print(create_instance(CateProd.open_json())[0][0].product)
