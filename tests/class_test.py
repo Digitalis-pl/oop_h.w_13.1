@@ -1,6 +1,6 @@
 import pytest
 from classes import Product, Category
-
+from function import create_instance
 
 category_list = [
   {
@@ -91,27 +91,54 @@ def device_category():
 def test_init_category(device_category):
     assert device_category[0].name == "devices"
     assert device_category[0].description == "electronic"
-    assert device_category[0].product == [
-      {
-        "name": "Samsung Galaxy C23 Ultra",
-        "description": "256GB, Серый цвет, 200MP камера",
-        "price": 180000.0,
-        "quantity": 5
-      },
-      {
-        "name": "Iphone 15",
-        "description": "512GB, Gray space",
-        "price": 210000.0,
-        "quantity": 8
-      },
-      {
+    assert Category.all_category == 2
+    assert Category.unique_product == 4
+    assert device_category[0].unique_product_in_category == 3
+    assert device_category[1].unique_product_in_category == 1
+
+
+prod_list = Product.open_json()
+
+
+def test_create_instance():
+  assert create_instance(prod_list)[1][0][0].name == "Samsung Galaxy C23 Ultra"
+
+
+d = {
+        "name": "55\" QLED 4K",
+        "description": "Фоновая подсветка",
+        "price": 123000.0,
+        "quantity": 7
+      }
+
+m = {
         "name": "Xiaomi Redmi Note 11",
         "description": "1024GB, Синий",
         "price": 31000.0,
         "quantity": 14
       }
-    ]
-    assert Category.all_category == 2
-    assert Category.unique_product == 4
-    assert device_category[0].unicue_product_in_category == 3
-    assert device_category[1].unicue_product_in_category == 1
+
+m_p = {
+        "name": "Xiaomi Redmi Note 11",
+        "description": "1024GB, Синий",
+        "price": 31100.0,
+        "quantity": 14
+      }
+
+
+def test_create_product():
+  assert Product.create_product(d, create_instance(prod_list)[1][0])
+  assert Product.create_product(d, create_instance(prod_list)[1][0]).description == "Фоновая подсветка"
+  assert Product.create_product(d, create_instance(prod_list)[1][0]).count == 7
+  assert Product.create_product(d, create_instance(prod_list)[1][0]).price == 123000.0
+  assert Product.create_product(d, create_instance(prod_list)[1][0]).name == "55\" QLED 4K"
+  assert Product.create_product(m, create_instance(prod_list)[1][0])
+  assert Product.create_product(m, create_instance(prod_list)[1][0]).count == 28
+  assert Product.create_product(m, create_instance(prod_list)[1][0]).name == "Xiaomi Redmi Note 11"
+  assert Product.create_product(m, create_instance(prod_list)[1][0]).price == 31000.0
+  assert Product.create_product(m, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0])
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).count == 28
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).name == "Xiaomi Redmi Note 11"
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).price == 31100.0
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
