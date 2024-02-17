@@ -26,7 +26,7 @@ class Category:
     def show_product(self):
         p_list = []
         for i in self.__product:
-            p_list.append(f'{i.name}, {i.price} руб. Остаток: {i.count}')
+            p_list.append(f'{i.name}, {i._Product__price} руб. Остаток: {i.quantity}')
         return "[%s]" % ",\n ".join(map(str, p_list))
 
     @property
@@ -42,34 +42,34 @@ class Product:
     name: str
     description: str
     prise: float
-    count: int
+    quantity: int
 
-    def __init__(self, name, description, prise, count):
+    def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
-        self.price = prise
-        self.count = count
+        self.__price = price
+        self.quantity = quantity
 
     @property
-    def product_price(self):
-        return self.price
+    def price(self):
+        return self.__price
 
-    @product_price.setter
-    def product_price(self, price):
+    @price.setter
+    def price(self, price):
         if price <= 0:
             print("некорректная цена")
-        if 0 < price < self.price:
+        if 0 < price < self.__price:
             answer = input("are you sure: y/n")
             if answer == "y":
-                self.price = price
+                self.__price = price
 
     @classmethod
     def create_product(cls, dictionary, list_p):
-        obj = list(dictionary.values())
-        new = cls(name=obj[0], description=obj[1], prise=obj[2], count=obj[3])
+       # obj = list(dictionary.values())
+        new = cls(**dictionary)
         for i in list_p:
             if new.name == i.name:
-                new.count += i.count
-                if new.price < i.price:
-                    new.price = i.price
+                new.quantity += i.quantity
+                if new.__price < i.__price:
+                    new.__price = i.__price
         return new

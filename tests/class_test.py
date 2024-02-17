@@ -53,7 +53,7 @@ def test_init(product_toster):
     assert product_toster.name == "toster"
     assert product_toster.description == "fry our bread"
     assert product_toster.price == 6500.50
-    assert product_toster.count == 20000
+    assert product_toster.quantity == 20000
 
 
 @pytest.fixture()
@@ -129,19 +129,21 @@ m_p = {
 def test_create_product():
   assert Product.create_product(d, create_instance(prod_list)[1][0])
   assert Product.create_product(d, create_instance(prod_list)[1][0]).description == "Фоновая подсветка"
-  assert Product.create_product(d, create_instance(prod_list)[1][0]).count == 7
+  assert Product.create_product(d, create_instance(prod_list)[1][0]).quantity == 7
   assert Product.create_product(d, create_instance(prod_list)[1][0]).price == 123000.0
   assert Product.create_product(d, create_instance(prod_list)[1][0]).name == "55\" QLED 4K"
   assert Product.create_product(m, create_instance(prod_list)[1][0])
-  assert Product.create_product(m, create_instance(prod_list)[1][0]).count == 28
+  assert Product.create_product(m, create_instance(prod_list)[1][0]).quantity == 28
   assert Product.create_product(m, create_instance(prod_list)[1][0]).name == "Xiaomi Redmi Note 11"
   assert Product.create_product(m, create_instance(prod_list)[1][0]).price == 31000.0
   assert Product.create_product(m, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
   assert Product.create_product(m_p, create_instance(prod_list)[1][0])
-  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).count == 28
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).quantity == 28
   assert Product.create_product(m_p, create_instance(prod_list)[1][0]).name == "Xiaomi Redmi Note 11"
   assert Product.create_product(m_p, create_instance(prod_list)[1][0]).price == 31100.0
   assert Product.create_product(m_p, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
 
-def test_show_product(device_category):
-    assert device_category[0].show_product == ["Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5", "Iphone 15, 210000.0 руб. Остаток: 8", "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14"]
+def test_show_product():
+    assert create_instance(open_json())[0][0].show_product == """[Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5,
+ Iphone 15, 210000.0 руб. Остаток: 8,
+ Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14]"""
