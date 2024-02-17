@@ -1,5 +1,5 @@
 import pytest
-from classes import Product, Category
+from classes import Product, Category, open_json
 from function import create_instance
 
 category_list = [
@@ -97,7 +97,7 @@ def test_init_category(device_category):
     assert device_category[1].unique_product_in_category == 1
 
 
-prod_list = Product.open_json()
+prod_list = open_json()
 
 
 def test_create_instance():
@@ -142,3 +142,6 @@ def test_create_product():
   assert Product.create_product(m_p, create_instance(prod_list)[1][0]).name == "Xiaomi Redmi Note 11"
   assert Product.create_product(m_p, create_instance(prod_list)[1][0]).price == 31100.0
   assert Product.create_product(m_p, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
+
+def test_show_product(device_category):
+    assert device_category[0].show_product == ["Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5", "Iphone 15, 210000.0 руб. Остаток: 8", "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14"]

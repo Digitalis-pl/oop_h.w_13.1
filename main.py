@@ -1,9 +1,4 @@
-from classes import Product
+from classes import open_json
+from function import create_instance
 
-d = Product.open_json()
-
-d = Product("toster", "fry our bread", 6500.50, 20000)
-
-print(d.change_price)
-d.change_price = 3
-print(d.change_price)
+print(create_instance(open_json())[0][0].show_product)
