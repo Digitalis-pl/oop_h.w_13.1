@@ -1,6 +1,7 @@
 import pytest
-from classes import Product, Category, open_json
-from function import create_instance
+from class_product import Product
+from class_category import Category
+from function import create_instance, open_json
 
 category_list = [
   {
@@ -143,7 +144,6 @@ def test_create_product():
   assert Product.create_product(m_p, create_instance(prod_list)[1][0]).price == 31100.0
   assert Product.create_product(m_p, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
 
+
 def test_show_product():
-    assert create_instance(open_json())[0][0].show_product == """[Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5,
- Iphone 15, 210000.0 руб. Остаток: 8,
- Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14]"""
+    assert create_instance(open_json())[0][0].show_product == ["Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5", "Iphone 15, 210000.0 руб. Остаток: 8", "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14"]
