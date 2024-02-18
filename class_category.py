@@ -13,16 +13,13 @@ class Category:
         Category.unique_product += len(product)
         self.unique_product_in_category = len(product)
 
-    def show_product(self):
+    @property
+    def product(self):
         p_list = []
         for i in self.__product:
             p_list.append(f'{i.name}, {i.price} руб. Остаток: {i.quantity}')
         return p_list
 
-    @property
-    def __product(self):
-        return self.__product
-
-    @__product.setter
-    def __product(self, object_product):
+    @product.setter
+    def product(self, object_product):
         self.__product.append(object_product)
