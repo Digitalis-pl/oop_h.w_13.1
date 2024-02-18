@@ -1,4 +1,12 @@
-from classes import Category, Product
+from class_product import Product
+from class_category import Category
+import json
+
+
+def open_json():
+    with open("products.json", "r", encoding="utf-8") as f:
+        category_list = json.loads(f.read())
+        return category_list
 
 
 def create_instance(category_list):
