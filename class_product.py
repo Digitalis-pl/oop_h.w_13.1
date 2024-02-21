@@ -3,20 +3,26 @@ class Product:
     description: str
     prise: float
     quantity: int
+    object_counter = 0
 
-    def __init__(self, name, description, price, quantity):
+    def __init__(self, name, description, price, quantity, color):
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
+        self.color = color
+        Product.object_counter += 1
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity}"
 
     def __add__(self, other):
-        self.total_sum = self.quantity * self.__price
-        other.total_sum = other.quantity * other.__price
-        return self.total_sum + other.total_sum
+        if type(self) == type(other):
+            self.total_sum = self.quantity * self.__price
+            other.total_sum = other.quantity * other.__price
+            return self.total_sum + other.total_sum
+        else:
+            return "несовместимые типы товаров"
 
     @property
     def price(self):
