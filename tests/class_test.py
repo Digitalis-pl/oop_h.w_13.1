@@ -3,6 +3,7 @@ from class_product import Product
 from class_category import Category
 from function import create_instance, open_json
 
+
 category_list = [
   {
     "name": "Смартфоны",
@@ -146,4 +147,26 @@ def test_create_product():
 
 
 def test_show_product():
-    assert create_instance(open_json())[0][0].show_product == ["Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5", "Iphone 15, 210000.0 руб. Остаток: 8", "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14"]
+    assert create_instance(open_json())[0][0].product == ["Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5",
+                                                               "Iphone 15, 210000.0 руб. Остаток: 8",
+                                                               "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14"]
+
+
+def test_len_category():
+    assert len(create_instance(open_json())[0][0]) == 3
+
+
+def test_str_category():
+    print((create_instance(open_json())[0][0]))
+    assert True
+
+
+def test_str_product():
+    print((create_instance(open_json())[1][0][0]))
+    assert True
+
+
+def test_add_product():
+    assert create_instance(open_json())[1][0][0] + create_instance(open_json())[1][0][1] == 2580000.0
+    with pytest.raises(TypeError):
+       print(create_instance(open_json())[1][0][0] + create_instance(open_json())[0][0])

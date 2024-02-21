@@ -1,15 +1,21 @@
-from class_category import Category
+from function import create_instance, open_json
 
 
 class CategoryIteration:
+    index_counter = -1
+
     def __init__(self, category_name):
         self.category_name = category_name
 
     def __iter__(self):
-        if Category.name == self.category_name:
-            return Category.product
+        for i in create_instance(open_json())[0]:
+            print(i)
+            if i.name == self.category_name:
+                self.iter_object = i.product
+                print(self.iter_object)
+        return self
 
     def __next__(self):
-        index_counter = -1
-        index_counter += 1
-        return Category.product[index_counter]
+        CategoryIteration.index_counter += 1
+        print(self.iter_object[CategoryIteration.index_counter])
+        return self.iter_object[CategoryIteration.index_counter]
