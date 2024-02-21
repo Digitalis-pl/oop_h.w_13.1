@@ -1,3 +1,10 @@
+from class_product import Product
+from class_smartphone import Smartphone
+from class_grass import Grass
+
+
+
+
 class Category:
     name: str
     description: str
@@ -23,9 +30,13 @@ class Category:
     def product(self):
         p_list = []
         for i in self.__product:
-            p_list.append(str(i))
+            if isinstance(i, (Product, Grass, Smartphone)):
+                p_list.append(str(i))
+            else:
+                raise TypeError
         return p_list
 
     @product.setter
     def product(self, object_product):
         self.__product.append(object_product)
+        Category.unique_product += 1
