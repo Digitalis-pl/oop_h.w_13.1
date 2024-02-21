@@ -3,6 +3,7 @@ from function import create_instance, open_json
 
 class CategoryIteration:
     index_counter = -1
+
     def __init__(self, category_name):
         self.category_name = category_name
 
