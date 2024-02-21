@@ -1,11 +1,13 @@
 import pytest
-from classes import Product, Category
-
+from class_product import Product
+from class_category import Category
+from function import create_instance, open_json
 
 category_list = [
   {
     "name": "Смартфоны",
-    "description": "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни",
+    "description": "Смартфоны, как средство не только коммуникации, но и получение дополнительных"
+                   " функций для удобства жизни",
     "products": [
       {
         "name": "Samsung Galaxy C23 Ultra",
@@ -29,7 +31,8 @@ category_list = [
   },
   {
     "name": "Телевизоры",
-    "description": "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+    "description": "Современный телевизор, который позволяет наслаждаться просмотром,"
+                   " станет вашим другом и помощником",
     "products": [
       {
         "name": "55\" QLED 4K",
@@ -40,15 +43,19 @@ category_list = [
     ]
   }
 ]
+
+
 @pytest.fixture
 def product_toster():
     return Product("toster", "fry our bread", 6500.50, 20000)
+
 
 def test_init(product_toster):
     assert product_toster.name == "toster"
     assert product_toster.description == "fry our bread"
     assert product_toster.price == 6500.50
-    assert product_toster.count == 20000
+    assert product_toster.quantity == 20000
+
 
 @pytest.fixture()
 def device_category():
@@ -81,30 +88,62 @@ def device_category():
       }
     ])]
 
+
 def test_init_category(device_category):
     assert device_category[0].name == "devices"
     assert device_category[0].description == "electronic"
-    assert device_category[0].product == [
-      {
-        "name": "Samsung Galaxy C23 Ultra",
-        "description": "256GB, Серый цвет, 200MP камера",
-        "price": 180000.0,
-        "quantity": 5
-      },
-      {
-        "name": "Iphone 15",
-        "description": "512GB, Gray space",
-        "price": 210000.0,
-        "quantity": 8
-      },
-      {
+    assert Category.all_category == 2
+    assert Category.unique_product == 4
+    assert device_category[0].unique_product_in_category == 3
+    assert device_category[1].unique_product_in_category == 1
+
+
+prod_list = open_json()
+
+
+def test_create_instance():
+  assert create_instance(prod_list)[1][0][0].name == "Samsung Galaxy C23 Ultra"
+
+
+d = {
+        "name": "55\" QLED 4K",
+        "description": "Фоновая подсветка",
+        "price": 123000.0,
+        "quantity": 7
+      }
+
+m = {
         "name": "Xiaomi Redmi Note 11",
         "description": "1024GB, Синий",
         "price": 31000.0,
         "quantity": 14
       }
-    ]
-    assert Category.all_category == 2
-    assert Category.unicue_product == 4
-    assert device_category[0].unicue_product_in_category == 3
-    assert device_category[1].unicue_product_in_category == 1
+
+m_p = {
+        "name": "Xiaomi Redmi Note 11",
+        "description": "1024GB, Синий",
+        "price": 31100.0,
+        "quantity": 14
+      }
+
+
+def test_create_product():
+  assert Product.create_product(d, create_instance(prod_list)[1][0])
+  assert Product.create_product(d, create_instance(prod_list)[1][0]).description == "Фоновая подсветка"
+  assert Product.create_product(d, create_instance(prod_list)[1][0]).quantity == 7
+  assert Product.create_product(d, create_instance(prod_list)[1][0]).price == 123000.0
+  assert Product.create_product(d, create_instance(prod_list)[1][0]).name == "55\" QLED 4K"
+  assert Product.create_product(m, create_instance(prod_list)[1][0])
+  assert Product.create_product(m, create_instance(prod_list)[1][0]).quantity == 28
+  assert Product.create_product(m, create_instance(prod_list)[1][0]).name == "Xiaomi Redmi Note 11"
+  assert Product.create_product(m, create_instance(prod_list)[1][0]).price == 31000.0
+  assert Product.create_product(m, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0])
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).quantity == 28
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).name == "Xiaomi Redmi Note 11"
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).price == 31100.0
+  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
+
+
+def test_show_product():
+    assert create_instance(open_json())[0][0].show_product == ["Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5", "Iphone 15, 210000.0 руб. Остаток: 8", "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14"]
