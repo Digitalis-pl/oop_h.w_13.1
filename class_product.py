@@ -5,12 +5,12 @@ class Product:
     quantity: int
     object_counter = 0
 
-    def __init__(self, name, description, price, quantity, color):
+    def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
-        self.color = color
+        self.color = None
         Product.object_counter += 1
 
     def __str__(self):
@@ -22,7 +22,8 @@ class Product:
             other.total_sum = other.quantity * other.__price
             return self.total_sum + other.total_sum
         else:
-            return "несовместимые типы товаров"
+            raise TypeError
+          # return "несовместимые типы товаров"
 
     @property
     def price(self):
