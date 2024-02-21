@@ -2,7 +2,7 @@ import pytest
 from class_product import Product
 from class_category import Category
 from function import create_instance, open_json
-from class_category_iteration import CategoryIteration
+
 
 category_list = [
   {
@@ -99,11 +99,6 @@ def test_init_category(device_category):
     assert device_category[1].unique_product_in_category == 1
 
 
-def test_product_examples_counter():
-    print((create_instance(open_json())[1]))
-    assert Product.object_counter == 5
-
-
 prod_list = open_json()
 
 
@@ -175,11 +170,3 @@ def test_add_product():
     assert create_instance(open_json())[1][0][0] + create_instance(open_json())[1][0][1] == 2580000.0
     with pytest.raises(TypeError):
        print(create_instance(open_json())[1][0][0] + create_instance(open_json())[0][0])
-
-
-r = CategoryIteration("Смартфоны")
-
-
-#def test_category_iteration():
-#    for i in r:
-#        print(i.name)

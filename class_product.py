@@ -1,9 +1,12 @@
-class Product:
+from class_all_product import AllProductClass
+
+
+class Product(AllProductClass):
     name: str
     description: str
     prise: float
     quantity: int
-    object_counter = 0
+    all_product = []
 
     def __init__(self, name, description, price, quantity):
         self.name = name
@@ -11,7 +14,7 @@ class Product:
         self.__price = price
         self.quantity = quantity
         self.color = None
-        Product.object_counter += 1
+        Product.all_product.append(self)
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity}"
@@ -23,7 +26,6 @@ class Product:
             return self.total_sum + other.total_sum
         else:
             raise TypeError
-          # return "несовместимые типы товаров"
 
     @property
     def price(self):
@@ -47,3 +49,6 @@ class Product:
                 if new.__price < i.__price:
                     new.__price = i.__price
         return new
+
+    def __len__(self):
+        return len(Product.all_product)
