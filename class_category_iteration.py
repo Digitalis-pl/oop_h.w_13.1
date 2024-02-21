@@ -1,4 +1,4 @@
-from class_category import Category
+from function import create_instance, open_json
 
 
 class CategoryIteration:
@@ -6,10 +6,12 @@ class CategoryIteration:
         self.category_name = category_name
 
     def __iter__(self):
-        if Category.name == self.category_name:
-            return Category.product
+        for i in create_instance(open_json())[0]:
+           if i.name == self.category_name:
+               self.iter_object = i.product
+        return self.iter_object
 
     def __next__(self):
         index_counter = -1
         index_counter += 1
-        return Category.product[index_counter]
+        return self.iter_object[index_counter]
