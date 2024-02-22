@@ -2,7 +2,7 @@ from class_product import Product
 from class_all_product import AllProductClass
 
 
-class Grass(AllProductClass, Product):
+class Grass(Product):
     country: str
     term: int
     colour: str

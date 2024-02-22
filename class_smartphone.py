@@ -2,7 +2,7 @@ from class_product import Product
 from class_all_product import AllProductClass
 
 
-class Smartphone(AllProductClass, Product):
+class Smartphone(Product):
     efficiency: float
     model: str
     internal_memory: float
