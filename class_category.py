@@ -1,9 +1,10 @@
 from class_product import Product
 from class_smartphone import Smartphone
 from class_grass import Grass
+from mixin_repr import MixinRepr
 
 
-class Category:
+class Category(MixinRepr):
     name: str
     description: str
     product: list
