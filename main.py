@@ -1,13 +1,16 @@
 from function import create_instance, open_json
 from class_category_iteration import CategoryIteration
-#print(create_instance(open_json())[1][0])
 
-smth = create_instance(open_json())[1]
+
+some = create_instance(open_json())[1]
+
+
 def show():
     index = -1
     index += 1
-    return smth[index]
+    return some[index]
 
 
-r = CategoryIteration("Смартфоны")
-print(r.iter_object)
+a = CategoryIteration("Смартфоны")
+for x in a:
+    print(x)

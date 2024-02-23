@@ -8,7 +8,7 @@ class AllProductClass(ABC):
         pass
 
     @abstractmethod
-    def create_product(self):
+    def create_product(self, dictionary, list_p):
         pass
 
     @abstractmethod
@@ -16,7 +16,7 @@ class AllProductClass(ABC):
         pass
 
     @abstractmethod
-    def __add__(self):
+    def __add__(self, other):
         pass
 
     @abstractmethod
