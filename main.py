@@ -1,5 +1,7 @@
 from function import create_instance, open_json
 from class_category_iteration import CategoryIteration
+from class_product import Product
+from class_category import Category
 
 
 some = create_instance(open_json())[1]

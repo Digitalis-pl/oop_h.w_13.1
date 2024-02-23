@@ -36,5 +36,8 @@ class Category:
 
     @product.setter
     def product(self, object_product):
-        self.__product.append(object_product)
-        Category.unique_product += 1
+        if isinstance(object_product, (Product, Grass, Smartphone)):
+            self.__product.append(object_product)
+            Category.unique_product += 1
+        else:
+            raise TypeError
