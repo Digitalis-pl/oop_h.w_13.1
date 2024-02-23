@@ -4,10 +4,6 @@ from abc import ABC, abstractmethod
 class AllProductClass(ABC):
 
     @abstractmethod
-    def __init__(self):
-        pass
-
-    @abstractmethod
     def create_product(self, dictionary, list_p):
         pass
 

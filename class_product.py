@@ -1,4 +1,8 @@
-class Product:
+from class_all_product import AllProductClass
+from mixin_repr import MixinRepr
+
+
+class Product(AllProductClass, MixinRepr):
     name: str
     description: str
     prise: float

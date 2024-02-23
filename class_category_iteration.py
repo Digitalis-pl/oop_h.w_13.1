@@ -1,7 +1,8 @@
 from function import create_instance, open_json
+from mixin_repr import MixinRepr
 
 
-class CategoryIteration:
+class CategoryIteration(MixinRepr):
     def __init__(self, category_name):
         self.index_counter = 0
         self.category_name = category_name
