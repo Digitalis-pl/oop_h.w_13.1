@@ -4,17 +4,9 @@ from class_smartphone import Smartphone
 from class_grass import Grass
 from mixin_repr import MixinRepr
 from class_category_iteration import CategoryIteration
+from class_order import Order
 
-
-c = Category("w", "e", [1, 2, 3])
-p = Product("a", "b", 20, 3)
-s = Smartphone("s", "d", 22, 33, 55, 44, "c", "c")
-g = Grass("n", "m", 66, 8, "v", 4, "b")
-ca = CategoryIteration("Смартфоны")
-
-
-print(repr(c))
-print(repr(p))
-print(repr(s))
-print(repr(g))
-print(repr(ca))
+order = Order("Samsung Galaxy C23 Ultra", 2)
+order.choose_product()
+order.count_total_sum()
+print(order)
