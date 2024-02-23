@@ -1,6 +1,3 @@
-from class_all_product import AllProductClass
-
-
 class Product():
     name: str
     description: str
@@ -21,7 +18,7 @@ class Product():
 
     def __add__(self, other):
         if not isinstance(other, Product):
-            raise ValueError('Складывать можно только объекты Employee и дочерние от них.')
+            raise ValueError('Складывать можно только объекты Product и дочерние от них.')
         if type(self) == type(other):
             self.total_sum = self.quantity * self.__price
             other.total_sum = other.quantity * other.__price

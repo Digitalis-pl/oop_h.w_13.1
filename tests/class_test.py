@@ -170,7 +170,7 @@ def test_str_product():
 
 def test_add_product():
     assert create_instance(open_json())[1][0][0] + create_instance(open_json())[1][0][1] == 2580000.0
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
        print(create_instance(open_json())[1][0][0] + create_instance(open_json())[0][0])
 
 

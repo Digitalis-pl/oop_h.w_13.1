@@ -3,8 +3,6 @@ from class_smartphone import Smartphone
 from class_grass import Grass
 
 
-
-
 class Category:
     name: str
     description: str
