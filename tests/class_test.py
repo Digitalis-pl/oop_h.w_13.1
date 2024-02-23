@@ -102,10 +102,11 @@ def test_init_category(device_category):
 
 
 prod_list = open_json()
+common_list = create_instance(prod_list)
 
 
 def test_create_instance():
-  assert create_instance(prod_list)[1][0][0].name == "Samsung Galaxy C23 Ultra"
+    assert common_list[1][0][0].name == "Samsung Galaxy C23 Ultra"
 
 
 d = {
@@ -131,47 +132,47 @@ m_p = {
 
 
 def test_create_product():
-  assert Product.create_product(d, create_instance(prod_list)[1][0])
-  assert Product.create_product(d, create_instance(prod_list)[1][0]).description == "Фоновая подсветка"
-  assert Product.create_product(d, create_instance(prod_list)[1][0]).quantity == 7
-  assert Product.create_product(d, create_instance(prod_list)[1][0]).price == 123000.0
-  assert Product.create_product(d, create_instance(prod_list)[1][0]).name == "55\" QLED 4K"
-  assert Product.create_product(m, create_instance(prod_list)[1][0])
-  assert Product.create_product(m, create_instance(prod_list)[1][0]).quantity == 28
-  assert Product.create_product(m, create_instance(prod_list)[1][0]).name == "Xiaomi Redmi Note 11"
-  assert Product.create_product(m, create_instance(prod_list)[1][0]).price == 31000.0
-  assert Product.create_product(m, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
-  assert Product.create_product(m_p, create_instance(prod_list)[1][0])
-  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).quantity == 28
-  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).name == "Xiaomi Redmi Note 11"
-  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).price == 31100.0
-  assert Product.create_product(m_p, create_instance(prod_list)[1][0]).description == "1024GB, Синий"
+    assert Product.create_product(d, common_list[1][0])
+    assert Product.create_product(d, common_list[1][0]).description == "Фоновая подсветка"
+    assert Product.create_product(d, common_list[1][0]).quantity == 7
+    assert Product.create_product(d, common_list[1][0]).price == 123000.0
+    assert Product.create_product(d, common_list[1][0]).name == "55\" QLED 4K"
+    assert Product.create_product(m, common_list[1][0])
+    assert Product.create_product(m, common_list[1][0]).quantity == 28
+    assert Product.create_product(m, common_list[1][0]).name == "Xiaomi Redmi Note 11"
+    assert Product.create_product(m, common_list[1][0]).price == 31000.0
+    assert Product.create_product(m, common_list[1][0]).description == "1024GB, Синий"
+    assert Product.create_product(m_p, common_list[1][0])
+    assert Product.create_product(m_p, common_list[1][0]).quantity == 28
+    assert Product.create_product(m_p, common_list[1][0]).name == "Xiaomi Redmi Note 11"
+    assert Product.create_product(m_p, common_list[1][0]).price == 31100.0
+    assert Product.create_product(m_p, common_list[1][0]).description == "1024GB, Синий"
 
 
 def test_show_product():
-    assert create_instance(open_json())[0][0].product == ["Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5",
-                                                               "Iphone 15, 210000.0 руб. Остаток: 8",
-                                                               "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14"]
+    assert common_list[0][0].product == ["Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5",
+                                         "Iphone 15, 210000.0 руб. Остаток: 8",
+                                         "Xiaomi Redmi Note 11, 31000.0 руб. Остаток: 14"]
 
 
 def test_len_category():
-    assert len(create_instance(open_json())[0][0]) == 3
+    assert len(common_list[0][0]) == 3
 
 
 def test_str_category():
-    print((create_instance(open_json())[0][0]))
+    print((common_list[0][0]))
     assert True
 
 
 def test_str_product():
-    print((create_instance(open_json())[1][0][0]))
+    print((common_list[1][0][0]))
     assert True
 
 
 def test_add_product():
-    assert create_instance(open_json())[1][0][0] + create_instance(open_json())[1][0][1] == 2580000.0
+    assert common_list[1][0][0] + common_list[1][0][1] == 2580000.0
     with pytest.raises(ValueError):
-       print(create_instance(open_json())[1][0][0] + create_instance(open_json())[0][0])
+        print(common_list[1][0][0] + common_list[0][0])
 
 
 a = Grass("sphagnum", "green green", 3000, 5, "Sweden", "2 month",  "green")
@@ -210,4 +211,3 @@ def test_add_product_in_category():
     assert c.product
     with pytest.raises(TypeError):
         c.product = c
-
