@@ -95,7 +95,7 @@ def device_category():
 def test_init_category(device_category):
     assert device_category[0].name == "devices"
     assert device_category[0].description == "electronic"
-    assert Category.all_category == 2
+    assert Category.all_category == 3
     assert Category.unique_product == 4
     assert device_category[0].unique_product_in_category == 3
     assert device_category[1].unique_product_in_category == 1
@@ -198,3 +198,16 @@ def test_init_smartphone():
     assert b.model == "Galaxy C23 Ultra"
     assert b.internal_memory == "256GB"
     assert b.color == "Серый"
+
+
+p = Product("z", "v", 3, 4)
+c = Category("c_p", "d_p", [])
+
+
+def test_add_product_in_category():
+    c.product = p
+    print(c.product)
+    assert c.product
+    with pytest.raises(TypeError):
+        c.product = c
+
