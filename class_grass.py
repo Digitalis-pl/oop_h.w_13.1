@@ -13,6 +13,7 @@ class Grass(Product, AllProductClass, MixinRepr):
         self.country = country
         self.term = term
         self.color = color
+        super().__repr__()
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity}"

@@ -23,7 +23,3 @@ def create_instance(category_list):
             all_product_list.append(Product(x["name"], x["description"], x["price"], x["quantity"]))
         category_instance_list.append(Category(i["name"], i["description"], product_list[counter]))
     return [category_instance_list, product_list, all_product_list]
-
-
-print(len(create_instance(open_json())))
-print(create_instance(open_json())[2])

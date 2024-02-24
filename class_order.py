@@ -9,12 +9,12 @@ class Order:
         self.product_quantity = product_quantity
         self.total = 0
         self.chosen = None
+        super().__repr__()
 
     def choose_product(self):
         for i in create_instance(open_json())[2]:
             if self.product_name == i.name:
                 self.chosen = i
-                print(self.chosen)
                 return self.chosen
 
     def count_total_sum(self):
