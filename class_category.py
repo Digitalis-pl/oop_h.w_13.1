@@ -18,6 +18,7 @@ class Category(MixinRepr):
         Category.all_category += 1
         Category.unique_product += len(product)
         self.unique_product_in_category = len(product)
+        super().__repr__()
 
     def __len__(self):
         return len(self.product)

@@ -15,6 +15,7 @@ class Smartphone(Product, AllProductClass, MixinRepr):
         self.model = model
         self.internal_memory = internal_memory
         self.color = color
+        super().__repr__()
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity}"
