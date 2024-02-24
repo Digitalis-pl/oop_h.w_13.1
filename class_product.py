@@ -50,8 +50,8 @@ class Product(AllProductClass, MixinRepr):
         for i in list_p:
             if new.name == i.name:
                 new.quantity += i.quantity
-                if new.__price < i.__price:
-                    new.__price = i.__price
+                if new.__price < i.price:
+                    new.__price = i.price
         return new
 
     def __len__(self):
