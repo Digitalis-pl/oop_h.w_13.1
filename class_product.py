@@ -26,7 +26,7 @@ class Product(AllProductClass, MixinRepr):
             raise ValueError('Складывать можно только объекты Product и дочерние от них.')
         if type(self) == type(other):
             self.total_sum = self.quantity * self.__price
-            other.total_sum = other.quantity * other.__price
+            other.total_sum = other.quantity * other.price
             return self.total_sum + other.total_sum
         else:
             raise TypeError
@@ -50,8 +50,8 @@ class Product(AllProductClass, MixinRepr):
         for i in list_p:
             if new.name == i.name:
                 new.quantity += i.quantity
-                if new.__price < i.price:
-                    new.__price = i.price
+                if new.price < i.price:
+                    new.price = i.price
         return new
 
     def __len__(self):

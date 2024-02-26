@@ -9,7 +9,6 @@ class CategoryIteration(MixinRepr):
         self.iter_object = []
         super().__repr__()
 
-
     def __iter__(self):
         for i in create_instance(open_json())[0]:
             print(i)
