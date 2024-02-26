@@ -24,24 +24,24 @@ class Smartphone(Product, AllProductClass, MixinRepr):
         if not isinstance(other, Smartphone):
             raise ValueError('Складывать можно только объекты Product и дочерние от них.')
         if type(self) == type(other):
-            self.total_sum = self.quantity * self.__price
-            other.total_sum = other.quantity * other.__price
+            self.total_sum = self.quantity * self.price
+            other.total_sum = other.quantity * other.price
             return self.total_sum + other.total_sum
         else:
             raise TypeError
 
     @property
     def price(self):
-        return self.__price
+        return self.price
 
     @price.setter
     def price(self, price):
         if price <= 0:
             print("некорректная цена")
-        if 0 < price < self.__price:
+        if 0 < price < self.price:
             answer = input("are you sure: y/n")
             if answer == "y":
-                self.__price = price
+                self.price = price
 
     @classmethod
     def create_product(cls, dictionary, list_p):
@@ -49,8 +49,8 @@ class Smartphone(Product, AllProductClass, MixinRepr):
         for i in list_p:
             if new.name == i.name:
                 new.quantity += i.quantity
-                if new.__price < i.__price:
-                    new.__price = i.__price
+                if new.price < i.price:
+                    new.price = i.price
         return new
 
     def __len__(self):
