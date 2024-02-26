@@ -1,11 +1,10 @@
 from class_product import Product
 from class_smartphone import Smartphone
 from class_grass import Grass
+from mixin_repr import MixinRepr
 
 
-
-
-class Category:
+class Category(MixinRepr):
     name: str
     description: str
     product: list
@@ -19,6 +18,7 @@ class Category:
         Category.all_category += 1
         Category.unique_product += len(product)
         self.unique_product_in_category = len(product)
+        super().__repr__()
 
     def __len__(self):
         return len(self.product)
@@ -38,5 +38,8 @@ class Category:
 
     @product.setter
     def product(self, object_product):
-        self.__product.append(object_product)
-        Category.unique_product += 1
+        if isinstance(object_product, (Product, Grass, Smartphone)):
+            self.__product.append(object_product)
+            Category.unique_product += 1
+        else:
+            raise TypeError

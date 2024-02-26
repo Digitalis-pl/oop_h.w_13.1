@@ -1,13 +1,9 @@
-from function import create_instance, open_json
+from class_category import Category
+from class_product import Product
+from class_smartphone import Smartphone
+from class_grass import Grass
+from mixin_repr import MixinRepr
 from class_category_iteration import CategoryIteration
-#print(create_instance(open_json())[1][0])
+from class_order import Order
 
-smth = create_instance(open_json())[1]
-def show():
-    index = -1
-    index += 1
-    return smth[index]
-
-
-r = CategoryIteration("Смартфоны")
-print(r.iter_object)
+d = Category("q", "w", [1, 2])

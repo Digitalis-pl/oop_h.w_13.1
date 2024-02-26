@@ -1,21 +1,26 @@
 from function import create_instance, open_json
+from mixin_repr import MixinRepr
 
 
-class CategoryIteration:
-    index_counter = -1
-
+class CategoryIteration(MixinRepr):
     def __init__(self, category_name):
+        self.index_counter = 0
         self.category_name = category_name
+        self.iter_object = []
+        super().__repr__()
 
     def __iter__(self):
         for i in create_instance(open_json())[0]:
             print(i)
             if i.name == self.category_name:
                 self.iter_object = i.product
-                print(self.iter_object)
+                break
         return self
 
     def __next__(self):
-        CategoryIteration.index_counter += 1
-        print(self.iter_object[CategoryIteration.index_counter])
-        return self.iter_object[CategoryIteration.index_counter]
+        if self.index_counter < len(self.iter_object):
+            result = self.iter_object[self.index_counter]
+            self.index_counter += 1
+            return result
+        else:
+            raise StopIteration

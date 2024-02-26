@@ -1,7 +1,8 @@
 from class_all_product import AllProductClass
+from mixin_repr import MixinRepr
 
 
-class Product(AllProductClass):
+class Product(AllProductClass, MixinRepr):
     name: str
     description: str
     prise: float
@@ -15,14 +16,17 @@ class Product(AllProductClass):
         self.quantity = quantity
         self.color = None
         Product.all_product.append(self)
+        super().__repr__()
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity}"
 
     def __add__(self, other):
+        if not isinstance(other, Product):
+            raise ValueError('Складывать можно только объекты Product и дочерние от них.')
         if type(self) == type(other):
             self.total_sum = self.quantity * self.__price
-            other.total_sum = other.quantity * other.__price
+            other.total_sum = other.quantity * other.price
             return self.total_sum + other.total_sum
         else:
             raise TypeError
@@ -46,8 +50,8 @@ class Product(AllProductClass):
         for i in list_p:
             if new.name == i.name:
                 new.quantity += i.quantity
-                if new.__price < i.__price:
-                    new.__price = i.__price
+                if new.price < i.price:
+                    new.price = i.price
         return new
 
     def __len__(self):
