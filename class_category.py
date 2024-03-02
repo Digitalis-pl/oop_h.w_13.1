@@ -18,7 +18,7 @@ class Category(MixinRepr):
         Category.all_category += 1
         Category.unique_product += len(product)
         self.unique_product_in_category = len(product)
-        super().__repr__()
+        super().__init__()
 
     def __len__(self):
         return len(self.product)
@@ -38,8 +38,23 @@ class Category(MixinRepr):
 
     @product.setter
     def product(self, object_product):
-        if isinstance(object_product, (Product, Grass, Smartphone)):
-            self.__product.append(object_product)
-            Category.unique_product += 1
+        if object_product.quantity == 0:
+            raise ValueError("товар с нулевым количеством не может быть добавлен.")
         else:
-            raise TypeError
+            if isinstance(object_product, (Product, Grass, Smartphone)):
+                self.__product.append(object_product)
+                Category.unique_product += 1
+            else:
+                raise TypeError
+
+    def average_check_counter(self):
+        counter = 0
+        result = 0
+        try:
+            for i in self.__product:
+                counter += i.price
+                result = counter / self.unique_product_in_category
+        except ZeroDivisionError:
+            result = 0
+            return result
+        return result
