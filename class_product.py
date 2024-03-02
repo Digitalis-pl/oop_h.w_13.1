@@ -16,7 +16,7 @@ class Product(AllProductClass, MixinRepr):
         self.quantity = quantity
         self.color = None
         Product.all_product.append(self)
-        super().__repr__()
+        super().__init__()
 
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity}"

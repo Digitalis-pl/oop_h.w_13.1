@@ -1,4 +1,5 @@
 from function import create_instance, open_json
+from class_exception import NoQuantity
 
 
 class Order:
@@ -7,9 +8,12 @@ class Order:
     def __init__(self, product_name, product_quantity):
         self.product_name = product_name
         self.product_quantity = product_quantity
+        if self.product_quantity == 0:
+            raise ValueError("товар с нулевым количеством не может быть добавлен.")
         self.total = 0
         self.chosen = None
         super().__repr__()
+
 
     def choose_product(self):
         for i in create_instance(open_json())[2]:
