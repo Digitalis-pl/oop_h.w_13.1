@@ -1,13 +1,19 @@
-from class_order import Order
+class ScriptError(Exception):
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else "товар с нулевым количеством не может быть добавлен."
+
+    def __str__(self):
+        return self.message
 
 
-class Exceptions:
-    def __init__(self):
+class CheckQuantityException(ScriptError):
+    def __init__(self, *args):
+        self.quantity = args[0]
         try:
-            name = input()
-            number = input()
-            Order(product_name=name, product_quantity=number)
-        except ValueError:
+            if self.quantity == 0:
+                raise ScriptError
+        except ScriptError:
             print("Необходимо выбрать количество")
         else:
             print("Товар успешно добавлен")
