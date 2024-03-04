@@ -7,7 +7,7 @@ class CategoryIteration(MixinRepr):
         self.index_counter = 0
         self.category_name = category_name
         self.iter_object = []
-        super().__repr__()
+        super().__init__()
 
     def __iter__(self):
         for i in create_instance(open_json())[0]:

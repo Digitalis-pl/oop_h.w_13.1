@@ -6,4 +6,3 @@ from mixin_repr import MixinRepr
 from class_category_iteration import CategoryIteration
 from class_order import Order
 
-d = Category("q", "w", [1, 2])

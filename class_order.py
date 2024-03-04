@@ -1,7 +1,8 @@
 from function import create_instance, open_json
+from class_exception import CheckQuantityException
 
 
-class Order:
+class Order(CheckQuantityException):
     order_id: int
 
     def __init__(self, product_name, product_quantity):
@@ -9,7 +10,9 @@ class Order:
         self.product_quantity = product_quantity
         self.total = 0
         self.chosen = None
+        CheckQuantityException.__init__(self.product_quantity)
         super().__repr__()
+
 
     def choose_product(self):
         for i in create_instance(open_json())[2]:
