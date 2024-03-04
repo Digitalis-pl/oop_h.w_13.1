@@ -1,17 +1,16 @@
 from function import create_instance, open_json
-from class_exception import NoQuantity
+from class_exception import CheckQuantityException
 
 
-class Order:
+class Order(CheckQuantityException):
     order_id: int
 
     def __init__(self, product_name, product_quantity):
         self.product_name = product_name
         self.product_quantity = product_quantity
-        if self.product_quantity == 0:
-            raise ValueError("товар с нулевым количеством не может быть добавлен.")
         self.total = 0
         self.chosen = None
+        CheckQuantityException.__init__(self.product_quantity)
         super().__repr__()
 
 

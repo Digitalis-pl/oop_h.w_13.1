@@ -2,9 +2,10 @@ from class_product import Product
 from class_smartphone import Smartphone
 from class_grass import Grass
 from mixin_repr import MixinRepr
+from class_exception import CheckQuantityException
 
 
-class Category(MixinRepr):
+class Category(MixinRepr, CheckQuantityException):
     name: str
     description: str
     product: list
@@ -38,14 +39,12 @@ class Category(MixinRepr):
 
     @product.setter
     def product(self, object_product):
-        if object_product.quantity == 0:
-            raise ValueError("товар с нулевым количеством не может быть добавлен.")
+        CheckQuantityException.__init__(object_product.quantity)
+        if isinstance(object_product, (Product, Grass, Smartphone)):
+            self.__product.append(object_product)
+            Category.unique_product += 1
         else:
-            if isinstance(object_product, (Product, Grass, Smartphone)):
-                self.__product.append(object_product)
-                Category.unique_product += 1
-            else:
-                raise TypeError
+            raise TypeError
 
     def average_check_counter(self):
         counter = 0
